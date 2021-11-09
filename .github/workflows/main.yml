@@ -26,6 +26,6 @@ jobs:
           password: ${{ secrets.MAIL_PASSWORD }}
           subject: Log system updated！
           body: file://result.html
-          to: 852946650@qq.com
+          to: 418008503@qq.com,852946650@qq.com
           from: GitHub Actions
           content_type: text/html
