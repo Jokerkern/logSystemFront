@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
+import Home from '../views/Home'
 
 Vue.use(VueRouter)
 
@@ -8,15 +8,25 @@ const routes = [
   {
     path: '/',
     name: 'Home',
-    component: Home
+    component: Home,
+    meta: {
+      requireAuth: true
+    }
   },
   {
-    path: '/about',
-    name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
+    path: '/login', //  登录页面
+    name: 'Login',
+    component: () => import(/* webpackChunkName: "login" */ '../views/Login.vue')
+  },
+  {
+    path: '/register', //  登录页面
+    name: 'Register',
+    component: () => import(/* webpackChunkName: "login" */ '../views/Register.vue')
+  },
+  {
+    path: '*', //  404页面
+    name: 'Error_404',
+    component: () => import(/* webpackChunkName: "error_404" */ '../views/Error_404.vue')
   }
 ]
 
@@ -27,3 +37,8 @@ const router = new VueRouter({
 })
 
 export default router
+
+const originalPush = VueRouter.prototype.push;
+VueRouter.prototype.push = function push(location) {
+  return originalPush.call(this, location).catch(err => err)
+};
