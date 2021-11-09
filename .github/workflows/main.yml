@@ -11,8 +11,10 @@ jobs:
     steps:
       - name: 'Checkout codes'
         uses: actions/checkout@v1
+      - name: 'Url'
+        run: echo "github:https://github.com/Jokerkern/logSystemFront" > result.html
       - name: 'Get log'
-        run: git log | head -n6 > result.html | "github:https://github.com/Jokerkern/logSystemFront" >> result.html
+        run: git log | head -n6 >> result.html
       - name: 'Send mail'
         uses: dawidd6/action-send-mail@master
         with:
