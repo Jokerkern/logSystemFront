@@ -1,7 +1,7 @@
 <template>
   <div class="loginWrapper" id="loginBackground">
-    <div class="formWrapper">
-      <h1 class="loginTitle">登录</h1>
+    <div><div class="formWrapper">
+      <h1 class="loginTitle"><strong>登&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;录</strong></h1>
       <el-form
           :model="ruleForm"
           :rules="rules"
@@ -10,23 +10,31 @@
           class="demo-ruleForm"
           hide-required-asterisk
       >
+
         <el-form-item prop="telephone">
           <el-input
               prefix-icon="el-icon-mobile-phone"
               v-model="ruleForm.telephone"
-              placeholder="手机号"
-          ></el-input>
+              placeholder="请输入手机号"
+          >
+            <template slot="prepend">账&nbsp;&nbsp;号</template>
+          </el-input>
         </el-form-item>
+        
         <el-form-item prop="password">
           <el-input
               prefix-icon="el-icon-lock"
               v-model="ruleForm.password"
-              placeholder="密码"
+              placeholder="请输入密码"
               show-password
-          ></el-input>
+          >
+            <template slot="prepend">密&nbsp;&nbsp;码</template>
+          </el-input>
         </el-form-item>
+        
         <el-form-item class="loginButtonWrapper">
           <el-button
+              round
               class="loginButton"
               type="primary"
               @click="submitForm('ruleForm')"
@@ -36,6 +44,8 @@
         </el-form-item>
       </el-form>
     </div>
+    </div>
+    
   </div>
 </template>
 
@@ -98,29 +108,39 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
+
 .loginWrapper {
-  height: 740px !important;
-  min-height: 740px !important;
+  height: 749px !important;
+  min-height: 749px !important;
   padding-top: 50px;
   background-image: url(../assets/bg.jpeg);
+  line-height: 60px;
+ 
 
   .formWrapper {
     width: 375px;
     margin: 0 auto;
     text-align: center;
+    position: absolute;
+    top: 35%;
+    left: 45%;
+    transform: translate(-35%,-45%);
+    
 
 
     .loginTitle {
-
       margin-bottom: 10px;
       font-weight: 300;
       font-size: 30px;
-      color: rgb(20, 48, 53);
+      color:  rgb(57, 110, 119);
+      
+      
     }
 
     .demo-ruleForm {
       width: 100%;
       margin-top: 20px;
+      
 
       >>> .el-form-item__content {
         margin-left: 0 !important;
@@ -129,7 +149,7 @@ export default {
       &>>> .el-input__inner {
         font-size: 16px;
         box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);
-        border-radius: 5px;
+        border-radius: 2px;
       }
 
       .forgetPassword {
@@ -145,6 +165,7 @@ export default {
         &>>> .el-button {
           padding: 10px 90px;
           font-size: 16px;
+          color:  rgb(74, 76, 77);
         }
       }
     }

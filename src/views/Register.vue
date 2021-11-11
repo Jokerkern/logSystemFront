@@ -3,7 +3,7 @@
 <template>
   <div class="registerWrapper" id="registerBackground">
     <div class="formWrapper">
-      <h1 class="registerTitle">注册</h1>
+      <h1 class="registerTitle" ><strong>注&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;册</strong></h1>
       <el-form
           :model="ruleForm"
           :rules="rules"
@@ -16,26 +16,43 @@
           <el-input
               prefix-icon="el-icon-user"
               v-model="ruleForm.username"
-              placeholder="用户名"
-          ></el-input>
+              placeholder="请输入昵称"
+          >
+            <template slot="prepend">用&nbsp;&nbsp;户&nbsp;&nbsp;名</template>
+          </el-input>
         </el-form-item>
         <el-form-item prop="telephone">
           <el-input
               prefix-icon="el-icon-mobile-phone"
               v-model="ruleForm.telephone"
-              placeholder="手机号"
-          ></el-input>
+              placeholder="请输入手机号"
+          >
+            <template slot="prepend">手&nbsp;&nbsp;机&nbsp;&nbsp;号</template>
+          </el-input>
         </el-form-item>
         <el-form-item prop="password">
           <el-input
               prefix-icon="el-icon-lock"
               v-model="ruleForm.password"
-              placeholder="密码"
+              placeholder="请输入密码"
               show-password
-          ></el-input>
+          >
+            <template slot="prepend">密&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;码</template>
+          </el-input>
+        </el-form-item>
+        <el-form-item prop="repassword">
+          <el-input
+              prefix-icon="el-icon-lock"
+              v-model="ruleForm.repassword"
+              placeholder="再次输入密码"
+              show-password
+          >
+            <template slot="prepend">确认密码</template>
+          </el-input>
         </el-form-item>
         <el-form-item class="registerButtonWrapper">
           <el-button
+              round
               class="registerButton"
               type="primary"
               @click="submitForm('ruleForm')"
@@ -58,6 +75,7 @@ export default {
         username: '',
         telephone: '',
         password: '',
+        repassword:''
       },
       rules: {
         username: [
@@ -71,6 +89,20 @@ export default {
             message: "长度在 5 到 20 个字符",
             trigger: "blur",
           },
+        ],
+        repassword: [
+          { required: true, message: "请确认密码", trigger: "blur" },
+          {
+            validator:(rule,value,callback)=>{
+            if(value===''){
+            callback(new Error('请再次输入密码'))
+            }else if(value!==this.ruleForm.password){
+            callback(new Error('两次输入密码不一致'))
+            }else{
+            callback( )}
+            },
+            trigger:'blur'
+            }
         ],
         telephone: [
           { required: true, message: "请输入手机号", trigger: "blur" },
@@ -123,21 +155,26 @@ export default {
 
 <style lang="stylus" scoped>
 .registerWrapper {
-  height: 500px !important;
-  min-height: 500px !important;
+  height: 749px !important;
+  min-height: 749px !important;
   width: 100% !important;
   padding-top: 50px;
+  background-image: url(../assets/bg.jpeg);
 
   .formWrapper {
     width: 375px;
     margin: 0 auto;
     text-align: center;
+    position: absolute;
+    top: 40%;
+    left: 47%;
+    transform: translate(-40%,-45%);
 
     .registerTitle {
       margin-bottom: 10px;
       font-weight: 300;
       font-size: 30px;
-      color: #000;
+      color:  rgb(57, 110, 119);
     }
 
     .demo-ruleForm {
@@ -150,6 +187,7 @@ export default {
 
       &>>> .el-input__inner {
         font-size: 16px;
+        border-radius: 2px;
       }
 
       .registerButtonWrapper {
@@ -160,6 +198,7 @@ export default {
         &>>> .el-button {
           padding: 10px 90px;
           font-size: 16px;
+          color: rgb(57, 110, 119);
         }
       }
     }
